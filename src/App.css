@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  background-color: black;
+  color: whitesmoke;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+main {
+  position: relative;
+}
+
+section {
+  min-height: 100vh;
+  /* border: solid white 3px; */
+  position: relative;
+  z-index: 2;
+}
+
+#canvas-elem::after{
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  background-image: url(/models/background-l.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.5s linear;
+  
+
+  
+  
+}
+
+#section-1 {
+  --gap: 5rem;
+
+  position: relative;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0.9rem;
+    .nav-elem {
+      max-width: 7rem;
+    }
+  }
+
+  .middle {
+    display: flex;
+
+    .left,
+    .right {
+      /* display: flex; */
+      width: 50%;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-block: 5rem;
+      gap: var(--gap);
+    }
+
+    h1 {
+      font-size: 7rem;
+      line-height: 1;
+      text-align: right;
+      /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    }
+  }
+
+  .bottom {
+    display: flex;
+    gap: var(--gap);
+
+    .left,
+    .right {
+      width: 50%;
+    }
+
+    .right {
+      /* font-weight:500 ; */
+      font-size: larger;
+      line-height: 1.6;
+      padding-left: 8%;
+      padding-top: 3%;
+    }
+  }
+
+  .first-line {
+    width: 35rem;
+    background-color: rgba(255, 0, 0, 0.323);
+    height: 1px;
+    position: absolute;
+    transform: rotate(45deg) translate(0, -18rem);
+  }
+  .second-line {
+    width: 10rem;
+    background-color: rgba(255, 0, 0, 0.323);
+    height: 1px;
+    position: absolute;
+    transform: rotate(135deg);
+    top: 23%;
+    right: 16%;
+  }
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nav-elem:nth-child(2) {
+  i {
+    color: red;
+  }
+}
+
+#section-2 {
+  .titles {
+    display: flex;
+    flex-direction: column;
+    padding-left: 17rem;
+    padding-block: 10rem;
+
+    .title {
+      display: flex;
+      gap: 4rem;
+      opacity: 0.2;
+      padding-block: 2rem;
+      /* opacity: 0.2; */
+      transition: all 0.3s linear;
+      cursor: pointer;
+
+      h1 {
+        /* font-family:cursive; */
+        font-size: 4.5rem;
+        font-weight: 100;
+
+        line-height: 1;
+        /* padding-left: 0%; */
+        justify-content: flex-start;
+      }
+      small {
+        width: 7%;
+        margin-top: 0.6rem;
+        /* margin-left: 1rem; */
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+
+    .title:hover {
+      opacity: 1;
+    }
+  }
+}
+
+main:has(#section-2 .title:hover) #canvas-elem::after {
+  opacity: 0;
+}
+
+.images{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0 ;
+  left: 0;
+  
+  img{
+    height: 100%;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+    top: 0 ;
+  left: 0;
+  opacity: 0;
+
+  }
+}
+
+
+main:has(#section-2 .title[img-title="tomorowland"]:hover) .images #tomorowland{
+  opacity: 1;
+  background-color: rgb(6, 6, 44);
+} 
+main:has(#section-2 .title[img-title="kennedy"]:hover) .images #kennedy{
+  opacity: 1;
+  background-color: #05230d;
+
+
+} 
+main:has(#section-2 .title[img-title="opera"]:hover) .images #opera{
+  opacity: 1;
+  background-color: #360707;
+} 
+main:has(#section-2 .title[img-title="kikk"]:hover) .images #kikk{
+  opacity: 1;
+  background-color: #0c052b;
+} 
+main:has(#section-2 .title[img-title="phone"]:hover) .images #phone{
+  opacity: 1;
+  background-color: #20031d;
+} 
+main:has(#section-2 .title[img-title="msi-chicago"]:hover) .images #msi-chicago{
+  opacity: 1;
+  background-color: #0a0e2d;
+} 
+main:has(#section-2 .title[img-title="navy-pier"]:hover) .images #navy-pier{
+  opacity: 1;
+  background-color: rgb(3, 3, 36);
+} 
+
+
+
+#section-3 {
+  padding-block: 10rem;
+
+
+
+  .top,.bottom{
+    display: flex;
+    width: 100%;
+
+  }
+
+  .left,.right{
+    width: 50%;
+  }
+
+  .top .left{
+    text-align: right;
+    font-weight: 400;
+    font-size: 3.2rem;
+    padding-right: 24vh;
+  }
+  .bottom .right{
+    display: flex;
+  
+
+    p{
+      opacity: 0.4;
+      font-weight: 300;
+      font-size: 1rem;
+      
+    }
+  }
+}
