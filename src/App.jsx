@@ -1,9 +1,14 @@
 import Dog from "./components/Dog";
+import Loading from "./components/Loading";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import { cover } from "three/src/extras/TextureUtils.js";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { useState, Suspense } from "react";
 
 function App() {
+  const [progress, setProgress] = useState(1.0);
+  const [playAnim, setPlayAnim] = useState(true);
+
   return (
     <>
       <main>
@@ -25,12 +30,32 @@ function App() {
             zIndex: 1,
             top: 0,
             left: 0,
-            pointerEvents: "none",
+            // pointerEvents: "none",
             // backgroundColor: "red"
           }}
         >
-          <Dog />
+          <Environment preset="studio" />
+          <OrbitControls enablePan={false} enableZoom={true} enableRotate={true} />
+          <Suspense fallback={<Loading />}>
+            <Dog progress={progress} playAnim={playAnim} />
+          </Suspense>
         </Canvas>
+
+        <div className="controls">
+          <label>Material Progress: </label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={progress}
+            onChange={(e) => setProgress(parseFloat(e.target.value))}
+          />
+          <br />
+          <button onClick={() => setPlayAnim(!playAnim)}>
+            {playAnim ? 'Pause Animation' : 'Play Animation'}
+          </button>
+        </div>
 
         <section id="section-1">
           <nav>

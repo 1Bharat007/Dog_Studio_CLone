@@ -1,20 +1,19 @@
 import React, { useEffect , useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useThree } from "@react-three/fiber";
-import {OrbitControls,  useAnimations,useGLTF,useTexture,} from "@react-three/drei";
-import { color, texture } from "three/tsl";
+import {OrbitControls,  useAnimations,useGLTF,useTexture, Environment} from "@react-three/drei";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 
-const Dog = () => {
+const Dog = ({ progress, playAnim }) => {
 
-gsap.registerPlugin(useGSAP())
 gsap.registerPlugin(ScrollTrigger)
 
 
-const model = useGLTF("/models/dog.drc.glb");
+const model = useGLTF("models/dog.drc.glb");
 // ------------------------------------------------
 
 useThree(({ camera, scene, gl }) => {
@@ -26,8 +25,18 @@ useThree(({ camera, scene, gl }) => {
 const { actions } = useAnimations(model.animations, model.scene);
 
 useEffect(() => {
-  actions["Take 001"].play();
-}, [actions]);
+  if (playAnim) {
+    actions["Take 001"].play();
+  } else {
+    actions["Take 001"].stop();
+  }
+}, [actions, playAnim]);
+
+useEffect(() => {
+  if (material.current) {
+    material.current.uProgress.value = progress;
+  }
+}, [progress]);
 
 
 const [normalMap, sampleMatCap, branchMap, branchNormalMap] = useTexture([
@@ -324,12 +333,6 @@ const branchMaterial = new THREE.MeshMatcapMaterial({
   //   })
   // }
   // ,[] )
-
-
-
-
-
-
 
 
   // ------------------------------------------------
